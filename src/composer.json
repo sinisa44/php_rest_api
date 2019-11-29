@@ -1,0 +1,11 @@
+{
+    "autoload" :{
+        "classmap":[
+            "app/http/Request.php",
+            "app/http/Response.php",
+            "app/Actor.php",
+            "app/Model.php",
+            "config/Connection.php"
+        ]
+    }
+}

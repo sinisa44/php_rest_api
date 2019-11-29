@@ -1,0 +1,1 @@
+docker run --rm --name test-app -d -p 9090:80 -v //c/Users/Sinisa/projects/docker-test/src/:/var/www/html --link mysql:mysql php:7.2-apache bash -c "docker-php-ext-install pdo_mysql gd; apache2-foreground"
