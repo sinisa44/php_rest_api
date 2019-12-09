@@ -11,7 +11,7 @@ class Model {
     public function select( $search=[] ){
       
         try{
-           $stmt = $this->conn->prepare( 'SELECT '.self::serach( $search ).' FROM '.$this->database.'.'.$this->table );
+           $stmt = $this->conn->prepare( 'SELECT '.self::search( $search ).' FROM '.$this->database.'.'.$this->table );
            $stmt->execute();
            
            $res = array();
@@ -21,10 +21,28 @@ class Model {
 
          return json_encode( $res );
 
-        }catch( PDOException $e ){
+        }catch( PDOException $e ){    
             echo $e->getMessage();
         }
     }
+
+    public function save($data=[]){    
+
+        $columns  = implode( ',', array_keys( $data ) );
+        $values   = implode( '", "', array_values($data ) );
+        $prep_val = implode( ',:', array_keys( $data ) );
+
+        $stmt = $this->conn->prepare( 'INSERT INTO '.$this->database.'.'.$this->table.' ('.$columns.') VALUES ("'.$values.'")');
+
+        $stmt->execute();
+
+    }
+
+    public function delete( $id ){
+        $stmt = ( 'DELETE FROM '. $this->database.'.'.$this->table.' WHERE id='.$id );
+    }
+
+
 
     public function find( $id, $search=[] ) {
         if( ! empty( $id ) ) {
@@ -35,9 +53,9 @@ class Model {
                 $res = $stmt->fetch( PDO::FETCH_OBJ );
 
                 if( $res ) {
-                  return json_encode ( $res );
+                    return json_encode( $res );
                 }else{
-                   return json_encode( 'no data' );
+                    return json_encode( 'no data' );
                 }
             }catch( PDOException $e ) {
                 echo $e->getMessage();

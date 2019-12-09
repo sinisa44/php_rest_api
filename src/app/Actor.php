@@ -20,5 +20,15 @@ class Actor extends Model {
      print_r( $actor );
     }
 
+    public function store( $request ) {
+      
+      $this->save(
+        [
+          'first_name' => $request->first_name,
+          'last_name'  => $request->last_name
+        ]
+    );
+    }
+
     
 }
