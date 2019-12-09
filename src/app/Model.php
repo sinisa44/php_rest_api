@@ -37,6 +37,12 @@ class Model {
         $stmt->execute();
 
     }
+    
+    public function update_data( $id , $data=[] ){
+
+
+        $stmt = $this->conn->prepare( 'UPDATE '.$this->database.'.'.$this->table.' SET' );
+    }
 
     public function delete( $id ){
         $stmt = ( 'DELETE FROM '. $this->database.'.'.$this->table.' WHERE id='.$id );

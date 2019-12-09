@@ -8,31 +8,32 @@ class Request {
       $method = self::get_method_name( $request_method );
 
       if( isset( $request ) ){
-        if(  $request !== 'all'){
+        if(  $request !== 'all' ){
           if( $method == 'show' ){
             if( class_exists( $class ) ) {
              self::call_class( $class, $method, $request );
             }
           }
-        }elseif( $request == 'all') {
+        }elseif( $request == 'all' ) {
           if( $method == 'index' ){
             if( class_exists( $class ) ){
-              $c = new $class;
-              $c->index();
+              self::call_class( $class, $method );
             }
           }
         }
       }
     }
-    public function post( $request, $request_method ){
-     if( ! empty( $request ) ){
-       $class  = self::get_class_name( $request_method );
-       $method = self::get_method_name( $request_method );
+    public function post( $request, $url, $request_method ){
+      if(  $_SERVER['PATH_INFO'] == $url ) {
+        if( ! empty( $request ) ){
+          $class  = self::get_class_name( $request_method );
+          $method = self::get_method_name( $request_method );
 
-       if( class_exists( $class ) ) {
-         self::call_class( $class, $method, $request);
-       }
-     }
+          if( class_exists( $class ) ) {
+            self::call_class( $class, $method, $request);
+          }
+        }
+      }
     }
 
     private static function get_class_name( $name ){
@@ -45,6 +46,6 @@ class Request {
 
     private static function call_class( $class, $method, $request=null ){
       $c = new $class;
-      $c->$method( (object) $request );
+      $c->$method( ( object ) $request );
     }
 }

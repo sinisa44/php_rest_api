@@ -15,9 +15,14 @@ class Actor extends Model {
 
     public function show( $id ){
       
-     $actor = $this->where('first_name', null, 'PENELOPE',['id','first_name'] );
+     $actor = $this->where( 'first_name', null, 'PENELOPE',['id','first_name'] );
 
      print_r( $actor );
+    }
+
+
+    public function update( $request ) {
+      print_r($request);
     }
 
     public function store( $request ) {
