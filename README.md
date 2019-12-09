@@ -14,6 +14,6 @@ Project is based on Active Record, and Factory Design pattern. In index is regis
 
 **Example**
 $request->post($data, '/actor/store', 'actor@store');
-  -$data = $_POST array with specific data for insert.
-  -/actor/store = url for triggering method.
-  -'actor@store' = string for calling specific class and his method.
+  * $data = $_POST array with specific data for insert.
+  * /actor/store = url for triggering method.
+  * 'actor@store' = string for calling specific class and his method.
