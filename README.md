@@ -12,7 +12,7 @@ PHP REST api for database administration
 
 Project is based on Active Record, and Factory Design pattern. In index is registraton of routes for API request.
 
-#example
+##example
 $request->post($data, '/actor/store', 'actor@store');
   -$data = $_POST array with specific data for insert.
   -/actor/store = url for triggering method.
